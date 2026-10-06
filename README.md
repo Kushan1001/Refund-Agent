@@ -50,7 +50,7 @@ The critic (`gpt-4.1`) checks what code can't: does the refund reason match what
 
 ## Evaluation
 
-[`eval.py`](eval.py) runs 11 difficult scenarios against the real models. `--sabotage` tells the main model to make mistakes, to test whether the critic catches them. There was one run per configuration, so treat the results as indicative:
+[`eval.py`](eval.py) runs 11 difficult scenarios against the real models. `--sabotage` tells the main model to make mistakes, to test whether the critic catches them.
 
 
 ## Quick start
@@ -82,8 +82,6 @@ Type `quit` to stop. If you stop while a refund is waiting for approval, the sup
 | `refund my laptop ORD-1002` | Pauses for supervisor approval |
 | `refund ORD-1003` | Blocked: outside the 30-day window |
 | `refund ORD-2001` | "Not found": the order belongs to another customer |
-
-An order can only be refunded once, across all sessions. Reset between attempts with `rm -rf sessions/`.
 
 
 ## Project structure
