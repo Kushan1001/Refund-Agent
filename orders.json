@@ -1,0 +1,8 @@
+[
+  {"order_id": "ORD-1001", "customer_email": "aarav@example.com", "item": "Wireless headphones", "category": "electronics", "item_price": 1299, "shipping_fee": 49, "status": "delivered", "delivered_days_ago": 5},
+  {"order_id": "ORD-1002", "customer_email": "aarav@example.com", "item": "Laptop", "category": "electronics", "item_price": 54990, "shipping_fee": 0, "status": "delivered", "delivered_days_ago": 10},
+  {"order_id": "ORD-1003", "customer_email": "aarav@example.com", "item": "Running shoes", "category": "footwear", "item_price": 2499, "shipping_fee": 79, "status": "delivered", "delivered_days_ago": 45},
+  {"order_id": "ORD-1004", "customer_email": "aarav@example.com", "item": "Gift card", "category": "gift_card", "item_price": 1000, "shipping_fee": 0, "status": "delivered", "delivered_days_ago": 2},
+  {"order_id": "ORD-1005", "customer_email": "aarav@example.com", "item": "Electric kettle", "category": "kitchen", "item_price": 899, "shipping_fee": 49, "status": "in_transit", "delivered_days_ago": null},
+  {"order_id": "ORD-2001", "customer_email": "meera@example.com", "item": "Backpack", "category": "bags", "item_price": 1799, "shipping_fee": 49, "status": "delivered", "delivered_days_ago": 3}
+]
