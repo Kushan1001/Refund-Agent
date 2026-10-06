@@ -22,8 +22,6 @@ You: ORD-1001 arrived broken, refund it
 Agent: Your ₹1,299 refund is done. I've escalated the ₹49 shipping fee to a colleague.
 [Actions recorded: refund of ₹1,299.00 on ORD-1001 (RF-0001); handed to a human (ESC-0001)]
 ```
-<sub>Shortened from a real run.</sub>
-
 
 - **Tools:** `lookup_order`, `search_policy`, `issue_refund`, `escalate_to_human`. Arguments are strict pydantic models, so unknown fields and wrong types are rejected.
 - **State:** a SQLite checkpointer saves after every step. Conversations, and runs paused for approval, survive a restart. A separate ledger enforces one refund per order across sessions.
