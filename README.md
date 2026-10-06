@@ -87,26 +87,6 @@ Type `quit` to stop. If you stop while a refund is waiting for approval, the sup
 
 An order can only be refunded once, across all sessions. Reset between attempts with `rm -rf sessions/`.
 
-### Other commands
-
-```bash
-python eval.py [--sabotage] [--only window,voucher]   # evaluation (real API calls)
-python tests/test_offline.py                          # offline tests with a fake model, no key needed
-rm -rf sessions/                                      # reset conversations and the ledger
-```
-
-## Configuration
-
-| Setting | Where | Default |
-|---|---|---|
-| Agent model | `OPENAI_MODEL` in `run.py` | `openai:gpt-4o-mini` |
-| Critic model | `CRITIC_MODEL` in `run.py` | `openai:gpt-4.1` |
-| Return window | `RETURN_WINDOW_DAYS` in `tools.py` | 30 days |
-| Approval threshold | `APPROVAL_THRESHOLD` in `tools.py` | ₹5,000 |
-| Non-refundable categories | `NON_REFUNDABLE` in `tools.py` | `gift_card`, `digital` |
-| Model calls per turn | `max_steps` in `build_graph()` | 8 |
-| Redrafts allowed after a critic rejection | `max_revisions` in `build_graph()` | 2 |
-| Messages shown to the model | `max_messages` in `build_graph()` | 30 |
 
 ## Project structure
 
