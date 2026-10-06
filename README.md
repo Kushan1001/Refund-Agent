@@ -24,22 +24,6 @@ Agent: Your ₹1,299 refund is done. I've escalated the ₹49 shipping fee to a 
 ```
 <sub>Shortened from a real run.</sub>
 
-## How it works
-
-```mermaid
-flowchart TD
-    U(["Customer message"]) --> M["model<br/>gpt-4o-mini"]
-    M -- "tool calls" --> T["tools<br/>policy checks in code"]
-    T -- "results" --> M
-    T -- "refund above ₹5,000" --> A{{"approval<br/>human y/n"}}
-    A -- "decision" --> M
-    M -- "draft reply" --> C["critic<br/>gpt-4.1"]
-    C -- "rejected: draft removed,<br/>model told why" --> M
-    C -- "approved" --> F["finish<br/>reply + actions footer"]
-    T -- "loop or 8 steps" --> G["give_up<br/>ticket for a human"]
-    C -- "3 rejections" --> G
-    G --> F
-```
 
 - **Tools:** `lookup_order`, `search_policy`, `issue_refund`, `escalate_to_human`. Arguments are strict pydantic models, so unknown fields and wrong types are rejected.
 - **State:** a SQLite checkpointer saves after every step. Conversations, and runs paused for approval, survive a restart. A separate ledger enforces one refund per order across sessions.
@@ -57,19 +41,6 @@ flowchart TD
 5. It has no earlier refund in the ledger.
 6. The amount is at most the item price, plus the shipping fee when the reason is `damaged` or `wrong_item`.
 7. If the amount is above ₹5,000, a human approves it. The checks run again after approval, in case something changed while waiting.
-
-## What catches what
-
-| Mistake | Caught by |
-|---|---|
-| Refund without lookup, over the amount owed, after 30 days, non-refundable category, undelivered, duplicate | Checks in code |
-| Another customer's order | Ownership check, with the same message as "not found" so orders can't be probed |
-| Refund above ₹5,000 | Human approval via `interrupt()` |
-| Bad tool name or arguments | Dispatcher and pydantic validation |
-| Loops or never finishing | Repeated-call detection and an 8-step limit, then hand-off to a human |
-| Claims a refund that never happened | Footer built from the ledger |
-| Wrong refund reason, refunding too little, false rules, made-up promises | Critic |
-
 ## The critic
 
 The critic (`gpt-4.1`) checks what code can't: does the refund reason match what the customer said, and is the reply true?
